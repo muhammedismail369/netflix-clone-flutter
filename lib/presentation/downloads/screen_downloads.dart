@@ -1,12 +1,14 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:netflix_app/core/colors/colors.dart';
 // import 'package:netflix_app/core/constants.dart';
 // import 'package:netflix_app/presentation/widgets/app_bar_widget.dart';
 
 // import '../../application/downloads/downloads_bloc.dart';
+import '../../application/downloads/downloads_bloc.dart';
 import '../../core/colors/colors.dart';
 import '../../core/constants.dart';
 import '../widgets/app_bar_widget.dart';
@@ -46,9 +48,9 @@ class Section2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       BlocProvider.of<DownloadsBloc>(context)
-          .add(const DownloadsEvent.getDownloadsImage());
+          .add(const DownloadsEvent.getDownloadsImages());
     });
 
     final Size size = MediaQuery.of(context).size;
@@ -73,10 +75,11 @@ class Section2 extends StatelessWidget {
           ),
         ),
         BlocBuilder<DownloadsBloc, DownloadsState>(builder: (context, state) {
+          print(state);
           return SizedBox(
             width: size.width,
             height: size.width,
-            child: state.loading
+            child: state.isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : Stack(
                     alignment: Alignment.center,
