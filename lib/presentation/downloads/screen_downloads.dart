@@ -75,7 +75,7 @@ class Section2 extends StatelessWidget {
           ),
         ),
         BlocBuilder<DownloadsBloc, DownloadsState>(builder: (context, state) {
-          print(state);
+          print(context);
           return SizedBox(
             width: size.width,
             height: size.width,
@@ -92,7 +92,7 @@ class Section2 extends StatelessWidget {
                         imageList:
                             '$imageAppendUrl${state.downloads[0].posterPath}',
                         margin: const EdgeInsets.only(
-                          left: 130,
+                          left: 150,
                           bottom: 50,
                         ),
                         angle: 20,
@@ -102,7 +102,7 @@ class Section2 extends StatelessWidget {
                         imageList:
                             '$imageAppendUrl${state.downloads[1].posterPath}',
                         margin: const EdgeInsets.only(
-                          right: 130,
+                          right: 150,
                           bottom: 50,
                         ),
                         angle: -20,
