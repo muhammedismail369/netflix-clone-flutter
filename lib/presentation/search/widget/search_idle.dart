@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:netflix_app/application/search/search_bloc.dart';
-import 'package:netflix_app/core/colors/colors.dart';
-import 'package:netflix_app/presentation/search/widget/title.dart';
+
+import '../../../application/search/search_bloc.dart';
+import '../../../core/colors/colors.dart';
 import '../../../core/constants.dart';
+import 'title.dart';
 
 class SearchIdleWidget extends StatelessWidget {
   const SearchIdleWidget({Key? key}) : super(key: key);
@@ -33,7 +34,7 @@ class SearchIdleWidget extends StatelessWidget {
                 itemBuilder: (ctx, index) {
                   final movie = state.idleList[index];
                   return TopSearchItemTile(
-                      title: movie.title ?? 'No title provider',
+                      title: movie.title ?? 'No title provided',
                       imageUrl: '$imageAppendUrl${movie.posterPath}');
                 },
                 separatorBuilder: (ctx, index) => kHeight20,

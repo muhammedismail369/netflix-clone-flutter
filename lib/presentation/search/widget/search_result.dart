@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:netflix_app/application/search/search_bloc.dart';
-import 'package:netflix_app/core/constants.dart';
-import 'package:netflix_app/presentation/search/widget/title.dart';
+
+import '../../../application/search/search_bloc.dart';
+import '../../../core/constants.dart';
+import 'title.dart';
 
 class SearchResult extends StatelessWidget {
   const SearchResult({Key? key}) : super(key: key);
