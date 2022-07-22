@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:netflix_clone/application/downloads/downloads_bloc.dart';
 import 'package:netflix_clone/presentation/main_page/screen_main_page.dart';
 
+import 'application/fast_laugh/fast_laugh_bloc.dart';
 import 'application/search/search_bloc.dart';
 import 'core/colors/colors.dart';
 import 'domain/core/di/injectable.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (ctx) => getIt<DownloadsBloc>()),
         BlocProvider(create: (ctx) => getIt<SearchBloc>()),
+        BlocProvider(create: (ctx) => getIt<FastLaughBloc>()),
       ],
       child: MaterialApp(
         title: "Netflix App",
