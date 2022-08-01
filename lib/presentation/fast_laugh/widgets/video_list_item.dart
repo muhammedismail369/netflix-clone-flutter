@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../application/fast_laugh/fast_laugh_bloc.dart';
@@ -83,19 +85,58 @@ class VideoListItem extends StatelessWidget {
                             : NetworkImage('$imageAppendUrl$posterPath'),
                       ),
                     ),
-                    VideoActionWidget(
-                      icon: Icons.emoji_emotions,
-                      title: 'LOL',
-                    ),
-                    VideoActionWidget(
+                    ValueListenableBuilder(
+                        valueListenable: likedVideosIdsNotifier,
+                        builder: (BuildContext c, Set<int> newLikedListIds,
+                            Widget? _) {
+                          final _index = index;
+                          if (newLikedListIds.contains(_index)) {
+                            return GestureDetector(
+                              onTap: () {
+                                // BlocProvider.of<FastLaughBloc>(context)
+                                //     .add(UnlikeVideos(id: _index));
+                                likedVideosIdsNotifier.value.remove(_index);
+                                likedVideosIdsNotifier.notifyListeners();
+                              },
+                              child: const VideoActionWidget(
+                                icon: Icons.favorite_outline,
+                                title: 'Liked',
+                              ),
+                            );
+                          }
+                          return GestureDetector(
+                            onTap: () {
+                              // BlocProvider.of<FastLaughBloc>(context)
+                              //     .add(LikeVideos(id: _index));
+                              likedVideosIdsNotifier.value.add(_index);
+                              likedVideosIdsNotifier.notifyListeners();
+                            },
+                            child: const VideoActionWidget(
+                              icon: Icons.emoji_emotions,
+                              title: 'LOL',
+                            ),
+                          );
+                        }),
+                    const VideoActionWidget(
                       icon: Icons.add,
                       title: 'My list',
                     ),
-                    VideoActionWidget(
-                      icon: Icons.share,
-                      title: 'Share',
+                    GestureDetector(
+                      onTap: () {
+                        final movieName =
+                            VideoListItemInheritedWidget.of(context)!
+                                .movieData
+                                .posterPath;
+                        if (movieName != null) {
+                          Share.share(movieName);
+                        }
+                      },
+                      child: const VideoActionWidget(
+                        icon: Icons.share,
+                        title: 'Share',
+                      ),
                     ),
-                    VideoActionWidget(
+                    const VideoActionWidget(
                       icon: Icons.play_arrow,
                       title: 'Play',
                     ),
